@@ -1,82 +1,37 @@
-## Figma URL
+#### Pre requistes
 
-[Contentful](https://www.figma.com/file/XtVr3JRCGWyZESYxd9EhZK/Contentful?node-id=0%3A1&t=SNnU6FgNUQXktIFb-1)
+Create a contentfull account and follow the steps to create new content type and entries
 
-## Steps
+#### Space ID and Access Token for Contentful CMS
 
-#### Install and Setup
+- Space-ID : 6tviu0ymh2va
+- Access-token : r7QclnDTVUTqAGMGCVR0vNtq8QB8rMsxV1W35s89HGQ;
 
-- npm install
-- npm run dev
-
-#### Structure
-
-Create Hero and Projects components
-
-#### Hero
-
-Setup Hero component.
-
-#### Nice Images
-
-[Undraw](https://undraw.co/)
-
-#### Data
-
-Explore data.js
-
-#### Headless CMS
-
-A headless CMS is a back-end only content management system that provides content creators with an intuitive interface for creating and managing content, while leaving the front-end presentation layer to be handled by a separate system or platform. This approach allows for greater flexibility and scalability, as the content can be easily distributed to multiple channels and devices, without being limited by the constraints of a particular front-end system.
-
-#### Contentful
-
-Create a Contentful account
-
-[Contentful ](https://www.contentful.com/)
-
-##### Create Data
-
-Setup content type and create few entries
-
-#### Explore API
-
-Get Space ID, Access Token and explore code examples.
-space ID - 6tviu0ymh2va
-access token - r7QclnDTVUTqAGMGCVR0vNtq8QB8rMsxV1W35s89HGQ
-
-Space ID -
-Access Token -
-
-#### Install SDK
+#### Steps to Integrate Contentful CMS with this app
 
 - npm install contentful
 
-#### Get Entries
+##### Get Entries
 
-```js
 import { createClient } from "contentful";
 
 const client = createClient({
-  space: "qz00uzgg3leh",
-  environment: "master", // defaults to 'master' if not set
-  accessToken: import.meta.env.VITE_API_KEY,
+space: "6tviu0ymh2va",
+environment: "master", // optional field default is 'master'
+accessToken: import.meta.env.VITE_API_KEY,
 });
 
+//either use .then or async/await
 client
-  .getEntries({ content_type: "projects" })
-  .then((response) => console.log(response.items))
-  .catch(console.error);
-```
+.getEntries({ content_type: "projects" })//name of the content type you created in contentful
+.then((response) => console.log(response.items))
+.catch(console.error);
 
-#### Custom Hook
+##### Create a Custom Hook
 
-Create custom hook with loading and projects state values.
+Encouraged to create a custom hook to separate out the logic to fetch data from Contentful into its own file so it can be reused throughout your application.
 
-#### Parse Data
+##### Parse Data and export to required file
 
-Setup projects array
-
-#### Setup Products Component
-
-Render data in Products component
+After getting the entries store it in a state variable and return it from the custom hook
+Render the content to on the UI as required
